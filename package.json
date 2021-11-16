@@ -1,0 +1,13 @@
+{
+  "name": "battleship-js",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "play": "node cli.js",
+    "dev": "nodemon cli.js"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
