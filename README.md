@@ -4,6 +4,8 @@
 
 [Original idea](https://gist.github.com/lizparody/528badd08958943a7d309195b824f25d)
 
+This is just a playground to play with ES6 and Node
+
 
 ## Install
 
@@ -33,9 +35,13 @@ If you have tested successfully on another CLI / OS, please add it to this list 
 - Run `npm install`
 - Run `npm run dev` (for hot reload)
 
+
+
 ## Roadmap
 
 - [x] CLI mode
+- [ ] Add preview in readme
 - [ ] Better CLI graphics
 - [ ] Browser version
-- Any idea ? Send pull request !
+
+Any idea ? Send pull request !
