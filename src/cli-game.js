@@ -1,6 +1,6 @@
 import readline from 'readline'
 import colorize from './cli-colors.js'
-import { RESULT_CODES } from './board.js'
+import { SHOT_RESULTS } from './board.js'
 
 export default class Game {
     constructor(board) {
@@ -35,17 +35,14 @@ export default class Game {
                 );
             } else {
                 console.log(
-                    colorize.block(
-                        `Bye, freshwater sailor...`,
-                        'magenta'
-                    )
+                    colorize.block(`Bye, freshwater swab...`, "magenta")
                 );
             }
 
             process.exit(0)
         })
 
-        this.launch(colorize.block('Waiting for shot...', 'magenta', null, 20))
+        this.launch(colorize.block('Waiting for shot... (example : A1)', 'magenta', null, 15))
     }
 
     /**
@@ -121,7 +118,7 @@ export default class Game {
                 }
 
                 // End the game when fleet is decimated
-                if (result === RESULT_CODES.decimated) {
+                if (result === SHOT_RESULTS.decimated.code) {
                     this.rl.close()
                 }
             }).catch(error => {
@@ -140,28 +137,28 @@ export default class Game {
     getTheShot(result, ship) {
         let answer, color, bg_color
         switch (result) {
-            case RESULT_CODES.missed:
+            case SHOT_RESULTS.missed.code:
                 ++this.hits[0]
-                answer = 'Missed, looser !!'
+                answer = this.randomMessage(SHOT_RESULTS.missed.messages);
                 color = 'cyan'
                 break;
-            case RESULT_CODES.played:
-                answer = 'Already played, bro'
+            case SHOT_RESULTS.played.code:
+                answer = this.randomMessage(SHOT_RESULTS.played.messages);
                 color = 'red'
                 break;
-            case RESULT_CODES.hit:
+            case SHOT_RESULTS.hit.code:
                 ++this.hits[1]
-                answer = 'BOOOOM in my face !!'
+                answer = this.randomMessage(SHOT_RESULTS.hit.messages);
                 color = 'green'
                 break;
-            case RESULT_CODES.sunk:
+            case SHOT_RESULTS.sunk.code:
                 ++this.hits[1]
-                answer = `Ow SH*T, my ${ship.name} is sunk !`
+                answer = this.randomMessage(SHOT_RESULTS.sunk.messages, { ship: ship.name });
                 color = 'yellow'
                 break;
-            case RESULT_CODES.decimated:
+            case SHOT_RESULTS.decimated.code:
                 ++this.hits[1]
-                answer = 'Yay, fleet is decimated, bravo !!'
+                answer = this.randomMessage(SHOT_RESULTS.decimated.messages);
                 color = 'black'
                 bg_color = 'green'
                 break;
@@ -174,6 +171,15 @@ export default class Game {
         if (answer) {
             return { answer, color, bg_color }
         }
+    }
+
+    randomMessage(messages, params = {}) {
+        let message = messages[Math.floor(Math.random() * messages.length)];
+        Object.keys(params).forEach(k => {
+            message = message.replace(`:${k}`, params[k])
+        })
+
+        return message
     }
 
     /**

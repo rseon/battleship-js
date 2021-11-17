@@ -1,13 +1,42 @@
 /**
- * Codes for hit results
+ * Shot results
  */
-export const RESULT_CODES = {
-    missed: 0, 
-    played: 1,
-    hit: 2,
-    sunk: 3,
-    decimated: 4
-}
+export const SHOT_RESULTS = {
+    missed: {
+        code: 0,
+        messages: [
+            "Missed, looser !!",
+            "HAHAAA, are you blind ?",
+            "You killed Nemo, you silly !",
+            "Nope, you need glasses.",
+        ],
+    },
+    played: {
+        code: 1,
+        messages: ["Already played, bro"],
+    },
+    hit: {
+        code: 2,
+        messages: [
+            "BOOOOM in my face !!",
+            "OUCH ! What did i just take !",
+            "Not even hurt... Ehm, I lied :(",
+        ],
+    },
+    sunk: {
+        code: 3,
+        messages: [
+            "Ow SH*T, my :ship is sunk !",
+            "WHAT THE HELL ??! You just sunk my :ship !",
+        ],
+    },
+    decimated: {
+        code: 4,
+        messages: [
+            "Yay, my fleet is decimated, bravo !!"
+        ],
+    },
+};
 
 export default class Board {
     constructor() {
@@ -243,7 +272,7 @@ export default class Board {
 
             // Already played
             if (choice.hit) {
-                result = RESULT_CODES.played
+                result = SHOT_RESULTS.played.code
             }
             else if (choice.ship) {
                 ship = choice.ship
@@ -254,19 +283,19 @@ export default class Board {
 
                 if (this.board[row][col].ship.isSunk()) {
                     if (this.fleet.isDecimated()) {
-                        result = RESULT_CODES.decimated
+                        result = SHOT_RESULTS.decimated.code
                     }
                     else {
-                        result = RESULT_CODES.sunk
+                        result = SHOT_RESULTS.sunk.code
                     }
                 }
                 else {
-                    result = RESULT_CODES.hit
+                    result = SHOT_RESULTS.hit.code
                 }
             }
             else {
                 // Missed
-                result = RESULT_CODES.missed;
+                result = SHOT_RESULTS.missed.code
                 choice.result = '⬜';
             }
 
