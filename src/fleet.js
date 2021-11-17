@@ -1,53 +1,53 @@
 export default class Fleet {
-	constructor() {
-		this.ships = []
-		this.decimated = false
-	}
+    constructor() {
+        this.ships = []
+        this.decimated = false
+    }
 
-	/**
-	 * Add ship to the fleet
-	 * 
-	 * @param Ship
-	 */
-	addShip(ship) {
-		this.ships.push(ship)
-	}
+    /**
+     * Add ship to the fleet
+     * 
+     * @param Ship
+     */
+    addShip(ship) {
+        this.ships.push(ship)
+    }
 
-	/**
-	 * Get ships
-	 * 
-	 * @return Array
-	 */
-	getShips() {
-		return this.ships
-	}
+    /**
+     * Get ships
+     * 
+     * @return Array
+     */
+    getShips() {
+        return this.ships
+    }
 
-	/**
-	 * Get if fleet is decimated
-	 * 
-	 * @return Boolean
-	 */
-	isDecimated() {
-		return this.decimated === true
-	}
+    /**
+     * Get if fleet is decimated
+     * 
+     * @return Boolean
+     */
+    isDecimated() {
+        return this.decimated === true
+    }
 
-	/**
-	 * Set a ship hit
-	 * 
-	 * @param Ship
-	 * @param Number
-	 */
-	setShipHit(ship, index) {
-		this.ships.some(s => {
-			if (s.name === ship.name) {
-				s.setHit(index)
-				return true
-			}
-		})
+    /**
+     * Set a ship hit
+     * 
+     * @param Ship
+     * @param Number
+     */
+    setShipHit(ship, index) {
+        this.ships.some(s => {
+            if (s.name === ship.name) {
+                s.setHit(index)
+                return true
+            }
+        })
 
-		// All ships are sunk = the fleet is decimated
-		if (this.ships.filter(s => s.isSunk()).length === this.ships.length) {
-			this.decimated = true
-		}
-	}
+        // All ships are sunk = the fleet is decimated
+        if (this.ships.filter(s => s.isSunk()).length === this.ships.length) {
+            this.decimated = true
+        }
+    }
 }

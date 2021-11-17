@@ -1,28 +1,28 @@
 // https://stackoverflow.com/a/41407246
 const references = {
-	reset: 0,
-	dim: 2,
-	underscore: 4,
-	reverse: 7,
-	hidden: 8,
+    reset: 0,
+    dim: 2,
+    underscore: 4,
+    reverse: 7,
+    hidden: 8,
 
-	black: 30,
-	red: 31,
-	green: 32,
-	yellow: 33,
-	blue: 34,
-	magenta: 35,
-	cyan: 36,
-	white: 37,
+    black: 30,
+    red: 31,
+    green: 32,
+    yellow: 33,
+    blue: 34,
+    magenta: 35,
+    cyan: 36,
+    white: 37,
 
-	bgBlack: 40,
-	bgRed: 41,
-	bgGreen: 42,
-	bgYellow: 43,
-	bgBlue: 44,
-	bgMagenta: 45,
-	bgCyan: 46,
-	bgWhite: 47,	
+    bgBlack: 40,
+    bgRed: 41,
+    bgGreen: 42,
+    bgYellow: 43,
+    bgBlue: 44,
+    bgMagenta: 45,
+    bgCyan: 46,
+    bgWhite: 47,    
 }
 
 /**
@@ -35,8 +35,8 @@ const references = {
  * @return String
  */
 global.colorize = (text, color) => {
-	const code = (color) => '\x1b[' + references[color] + 'm'
-	return code(color) + text + code('reset')
+    const code = (color) => '\x1b[' + references[color] + 'm'
+    return code(color) + text + code('reset')
 }
 
 /**
@@ -47,11 +47,11 @@ global.colorize = (text, color) => {
  * @return String
  */
 const blockEmptyLine = (text, bg_color = null) => {
-	text = ' '.repeat(text.length)
-	if (bg_color) {
-		text = colorize(text, bg_color)
-	}
-	return text
+    text = ' '.repeat(text.length)
+    if (bg_color) {
+        text = colorize(text, bg_color)
+    }
+    return text
 }
 
 /**
@@ -64,29 +64,29 @@ const blockEmptyLine = (text, bg_color = null) => {
  * @return String
  */
 const block = (text, color = null, bg_color = null, spaces_before = 0) => {
-	text = `   ${text}   `
+    text = `   ${text}   `
 
-	if (bg_color) {
-		bg_color = 'bg' + bg_color.charAt(0).toUpperCase() + bg_color.slice(1)
-	}
+    if (bg_color) {
+        bg_color = 'bg' + bg_color.charAt(0).toUpperCase() + bg_color.slice(1)
+    }
 
-	const prefix = ' '.repeat(spaces_before)
-	let final = prefix + blockEmptyLine(text, bg_color) + '\n'
+    const prefix = ' '.repeat(spaces_before)
+    let final = prefix + blockEmptyLine(text, bg_color) + '\n'
 
-	final += prefix
+    final += prefix
 
-	if (color) {
-		if (bg_color) {
-			final += colorize(colorize(text, color), bg_color) + '\n'
-		} else {
-			final += colorize(text, color) + '\n'
-		}
-	} else {
-		final += text + '\n'
-	}
-	final += prefix + blockEmptyLine(text, bg_color)
+    if (color) {
+        if (bg_color) {
+            final += colorize(colorize(text, color), bg_color) + '\n'
+        } else {
+            final += colorize(text, color) + '\n'
+        }
+    } else {
+        final += text + '\n'
+    }
+    final += prefix + blockEmptyLine(text, bg_color)
 
-	return final
+    return final
 }
 
 /**
@@ -111,10 +111,10 @@ const block = (text, color = null, bg_color = null, spaces_before = 0) => {
  * @example color.bgWhite('Text')
  */
 let functions = {
-	block
+    block
 }
 Object.keys(references).forEach(color => {
-	functions[color] = new Function('text', `return colorize(text, '${color}')`)
+    functions[color] = new Function('text', `return colorize(text, '${color}')`)
 })
 
 export default functions

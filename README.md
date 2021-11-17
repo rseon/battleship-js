@@ -1,8 +1,6 @@
-# Battle ship JS
+# Battleship JS
 
 > Play Battleship in CLI !
-
-[Original idea](https://gist.github.com/lizparody/528badd08958943a7d309195b824f25d)
 
 This is just a playground to play with ES6 and Node
 
@@ -13,7 +11,7 @@ You need NodeJS to play this game. And that's all.
 
 - Download last release and unzip it
 - Open a command prompt (CLI) in full screen
-- Type `node cli.js`
+- Type `npm run play` (or directly `node cli.js`)
 - Enjoy !
 
 
@@ -48,3 +46,8 @@ If you have tested successfully on another CLI / OS, please add it to this list 
 - [ ] Browser version
 
 Any idea ? Send pull request !
+
+
+## Credits
+
+Created by Rémi Séon, inspired from [this original gist](https://gist.github.com/lizparody/528badd08958943a7d309195b824f25d)
