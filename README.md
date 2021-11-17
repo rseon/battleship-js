@@ -23,8 +23,11 @@ Please use a "modern" command prompt. An older (like the default Windows CLI) ca
 
 This game has been tested on following CLI :
 
-- Terminal (Windows 10)
-- Git Bash (Windows 10)
+- **Windows 10**:
+  - Terminal
+  - Git Bash
+- **Linux (Ubuntu, openSUSE, Arch Linux, etc)**:
+  - gnome-terminal (Terminal GNOME)
 
 If you have tested successfully on another CLI / OS, please add it to this list and send a pull request :)
 
