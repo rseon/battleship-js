@@ -32,7 +32,7 @@ const references = {
  * 
  * @param String
  * @param String
- * @return String
+ * @returns String
  */
 global.colorize = (text, color) => {
     const code = (color) => '\x1b[' + references[color] + 'm'
@@ -44,7 +44,7 @@ global.colorize = (text, color) => {
  * 
  * @param String
  * @param String
- * @return String
+ * @returns String
  */
 const blockEmptyLine = (text, bg_color = null) => {
     text = ' '.repeat(text.length)
@@ -61,7 +61,7 @@ const blockEmptyLine = (text, bg_color = null) => {
  * @param String
  * @param String
  * @param Number
- * @return String
+ * @returns String
  */
 const block = (text, color = null, bg_color = null, spaces_before = 0) => {
     text = `   ${text}   `
@@ -117,5 +117,5 @@ Object.keys(references).forEach(color => {
     functions[color] = new Function('text', `return colorize(text, '${color}')`)
 })
 
-export default functions
+module.exports = functions
 

@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.2.0
+It would take too long to list all the changes made, but you need to know that it's a major update introducing the **Browser version** !
+
+In bulk :
+- Source code has been completely rewrited
+- Webpack and Babel has been added (to develop Browser version)
+- Random messages and cheat codes
+- And many other things...
+
+
+
 ## 1.1.0
 I tried to use emojis 💥 and 💦, but there ar not displayed in Git Bash, so I gave up the idea.
 
