@@ -162,6 +162,8 @@ class Board {
 
     /**
      * Get if there is already a ship on this location
+     * 
+     * Leave 1 empty box around the ship
      *
      * @param Array
      * @returns Boolean
@@ -169,12 +171,74 @@ class Board {
     collision(locations) {
         for (let i = 0; i < this.ships.length; i++) {
             for (let j = 0; j < locations.length; j++) {
-                if (this.ships[i].locations.includes(locations[j])) {
+                const square_boxes = this.searchSquareBox(
+                    this.ships[i].locations
+                );
+                if (square_boxes.includes(locations[j])) {
                     return true;
                 }
             }
         }
         return false;
+    }
+
+    /**
+     * Search the square that includes locations
+     *
+     * Returns the square outside this location :
+     * top left, top, top right, left, right, bottom left, bottom and bottom right
+     *
+     * Example for B2 => [A1, A2, A3, B1, B2, B3, C1, C2, C3]
+     * Example for A1 => [A1, A2, B1, B2]
+     * Example for J10 => [I9, I10, J9, J10] (for a board size of 10)
+     *
+     * @param Array
+     * @returns Array
+     */
+    searchSquareBox(locations) {
+        let boxes = [];
+        locations.forEach((l) => {
+            if (l !== null) {
+                let [col, row] = locationToColRow(l);
+                row = parseInt(row, 10);
+
+                [-1, 0, 1].forEach((x) => {
+                    [-1, 0, 1].forEach((y) => {
+                        const [newCol, newRow] = this.getCoordsByDeltas(
+                            col,
+                            row,
+                            x,
+                            y
+                        );
+                        if (
+                            newCol !== false &&
+                            newRow > 0 &&
+                            newRow < this.size
+                        ) {
+                            const coords = newCol + newRow;
+                            if (!boxes.includes(coords)) {
+                                boxes.push(coords);
+                            }
+                        }
+                    });
+                });
+            }
+        });
+
+        return boxes;
+    }
+
+    /**
+     * Returns coords [col, row] with delta
+     * 
+     * @param String
+     * @param Number
+     * @param Number
+     * @param Number
+     * @returns Array
+     */
+    getCoordsByDeltas(col, row, x, y) {
+        return [getCharByIndex(x, col, this.cols), row + y];
     }
 
     /**

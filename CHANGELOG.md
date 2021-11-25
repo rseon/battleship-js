@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.3.0
+### Changed
+- There is now at least 1 empty box between ships, to prevent all ships from being stuck together
+
+
+
 ## 1.2.0
 It would take too long to list all the changes made, but you need to know that it's a major update introducing the **Browser version** !
 

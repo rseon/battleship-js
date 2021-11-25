@@ -1,6 +1,6 @@
 /**
  * Generate a random number
- * 
+ *
  * @param Number
  * @returns Number
  */
@@ -10,7 +10,7 @@ const random = (length) => {
 
 /**
  * Get a random value from array
- * 
+ *
  * @param Array
  * @returns Mixed
  */
@@ -19,19 +19,27 @@ const randomArray = (array, limit = 0) => {
 };
 
 /**
+ * Get character by its index
  * 
  * @param Number
  * @param String
+ * @param Array
  * @returns String
  */
-const getCharByIndex = (index, base_char = "A") => {
-    return String.fromCharCode(base_char.charCodeAt(0) + index);
-}
+const getCharByIndex = (index, base_char = "A", acceptedChars = []) => {
+    const char = String.fromCharCode(base_char.charCodeAt(0) + index);
+
+    if (acceptedChars.length > 0 && !acceptedChars.includes(char)) {
+        return false;
+    }
+
+    return char;
+};
 
 /**
  * Get a random message from array of messages
- * 
- * @param Array 
+ *
+ * @param Array
  * @param Object
  * @returns String
  */
@@ -46,7 +54,7 @@ const randomMessage = (messages, params = {}) => {
 
 /**
  * Get score from shots
- * 
+ *
  * @param Array
  * @returns Object
  */
@@ -58,22 +66,22 @@ const getScores = (shots) => {
         total: total_shots,
         hits: shots[1],
         missed: shots[0],
-        accuracy
+        accuracy,
     };
-}
+};
 
 /**
  * Get elapsed time as minutes and seconds
- * 
- * @param Date start_time 
+ *
+ * @param Date start_time
  * @returns Object
  */
 const getElapsedTime = (start_time) => {
     const time = new Date() - start_time;
     const minutes = ("0" + Math.floor(time / 60000)).slice(-2);
     const seconds = ("0" + ((time % 60000) / 1000).toFixed(0)).slice(-2);
-    return { minutes, seconds }
-}
+    return { minutes, seconds };
+};
 
 const encrypt = (text) => text.split("").map((c) => c.charCodeAt() - 30).reverse().join(".");
 const decrypt = (text) => text.split(".").reverse().map((c) => String.fromCharCode(parseInt(c, 10) + 30)).join("");
