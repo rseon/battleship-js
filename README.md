@@ -7,6 +7,8 @@
 
 You need to clone this project and build it (see the next [Develop](#develop) section), then launch the **dist/index.html** file.
 
+[Test online](http://test.rseon.com/battleship-js/) !
+
 
 
 ## Play in CLI mode
@@ -50,8 +52,8 @@ If you have tested successfully on another CLI / OS, please add it to this list 
 - [x] Browser version
 - [ ] Add (animated) screenshots in readme
 - [ ] Better CLI graphics
-- [ ] Improve ship placement (at least 1 case between 2 ships)
-- [ ] Customize size
+- [x] Improve ship placement (at least 1 case between 2 ships)
+- [ ] Customize size (Browser version)
 
 Any idea ? Send pull request !
 
